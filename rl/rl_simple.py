@@ -22,6 +22,9 @@ DQN 的核心就是学习这个 Q 函数。
 2
 '''
 
+# 问题：如何实现GPU上并行的训练？
+# 模型放显存、输入模型的数据需要是一个批量
+
 
 # 定义网格世界环境
 class GridWorldEnv:
@@ -192,11 +195,11 @@ def train_and_visualize():
     # 绘制训练奖励变化
     plt.figure(figsize=(10, 5))
     plt.plot(rewards)
-    plt.title('训练过程中的奖励变化')
-    plt.xlabel('回合数')
-    plt.ylabel('总奖励')
+    plt.title('reward')
+    plt.xlabel('round')
+    plt.ylabel('total reward')
     plt.grid(True)
-    plt.show()
+    plt.savefig('reward.png')
     
     # 测试阶段 - 可视化学到的路径
     print("\n测试智能体...")
@@ -236,7 +239,7 @@ def train_and_visualize():
     plt.plot(path_x, path_y, 'b-o', linewidth=2, markersize=8)
     plt.title('path')
     plt.show()
-    plt.savefig('plot.png')
+    plt.savefig('path.png')
     
     print("\n输入: 初始状态 (智能体在[0,0])")
     print("输出: 学到的到达目标的路径")
